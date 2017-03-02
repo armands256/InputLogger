@@ -1,2 +1,2 @@
 # InputLogger
-Python project to logg mouse and keybord events into a csv file
+Python project to log mouse and keybord events into a csv file
