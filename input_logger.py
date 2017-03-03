@@ -10,8 +10,10 @@ if not os.path.exists("data"):
 logger = log.Logger("data\\")
 logger.writeRow(['Timestamp, ms', 'Event', 'Key value', 'Cursor X, px', 'Cursor Y, px'])
 logger.release()
+mouse_coordinates = [0,0]
 
 def OnKeyboardEvent(event):
+    global mouse_coordinates
     logger.open()
     print 'MessageName:', event.MessageName
     print 'Message:', event.Message
@@ -27,7 +29,7 @@ def OnKeyboardEvent(event):
     print 'Alt', event.Alt
     print 'Transition', event.Transition
     print '---'
-    logger.writeRow([event.Time, 'Key', event.Key])
+    logger.writeRow([event.Time, 'Key', event.Key, mouse_coordinates[0], mouse_coordinates[1]])
     logger.release()
     # return True to pass the event to other handlers
     return True
@@ -44,11 +46,19 @@ def OnMouseClickEvent(event):
     logger.release()
     return True
 
+def OnMouseMoveEvent(event):
+    print('Move')
+    global mouse_coordinates
+    print(event.Position)
+    mouse_coordinates = list(event.Position)
+    return True
+
 # create a hook manager
 hm = pyHook.HookManager()
 # watch for all mouse events
 hm.KeyDown = OnKeyboardEvent
 hm.MouseAllButtonsDown = OnMouseClickEvent
+hm.MouseMove = OnMouseMoveEvent
 # set the hook
 hm.HookMouse()
 hm.HookKeyboard()
