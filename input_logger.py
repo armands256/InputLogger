@@ -16,20 +16,20 @@ def OnKeyboardEvent(event):
     global mouse_coordinates
     logger.open()
     print 'MessageName:', event.MessageName
-    print 'Message:', event.Message
-    print 'Time:', event.Time
-    print 'Window:', event.Window
-    print 'WindowName:', event.WindowName
-    print 'Ascii:', event.Ascii, chr(event.Ascii)
     print 'Key:', event.Key
-    print 'KeyID:', event.KeyID
-    print 'ScanCode:', event.ScanCode
-    print 'Extended:', event.Extended
-    print 'Injected:', event.Injected
-    print 'Alt', event.Alt
-    print 'Transition', event.Transition
+    print 'Time:', event.Time
+    # print 'Message:', event.Message
+    #print 'Window:', event.Window
+    #print 'WindowName:', event.WindowName
+    #print 'Ascii:', event.Ascii, chr(event.Ascii)gffd
+    #print 'KeyID:', event.KeyID
+    #print 'ScanCode:', event.ScanCode
+    #print 'Extended:', event.Extended
+    #print 'Injected:', event.Injected
+    #print 'Alt', event.Alt
+    #print 'Transition', event.Transition
     print '---'
-    logger.writeRow([event.Time, 'Key', event.Key, mouse_coordinates[0], mouse_coordinates[1]])
+    logger.writeRow([event.Time, "'Key'", "'"+event.Key+"'", mouse_coordinates[0], mouse_coordinates[1]])
     logger.release()
     # return True to pass the event to other handlers
     return True
@@ -42,9 +42,10 @@ def OnMouseClickEvent(event):
     print 'Time:', event.Time
     print 'Position:', event.Position
     print '---'
-    logger.writeRow([event.Time, 'Mouse', 'LDown', event.Position[0], event.Position[1]])
+    logger.writeRow([event.Time, "'Mouse'", "'LDown'", event.Position[0], event.Position[1]])
     logger.release()
     return True
+
 
 def OnMouseMoveEvent(event):
     print('Move')
@@ -64,3 +65,5 @@ hm.HookMouse()
 hm.HookKeyboard()
 # wait forever
 pythoncom.PumpMessages()
+
+#
